@@ -3,14 +3,14 @@ package com.develogical;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecentlyUsedList {
-    private final List<String> elements = new ArrayList<>();
+public class RecentlyUsedList<T> {
+    private final List<T> elements = new ArrayList<>();
 
     public int size() {
         return elements.size();
     }
 
-    public void add(String s) {
+    public void add(T s) {
         if (elements.contains(s)) {
             moveToFirst(s);
             return;
@@ -18,17 +18,17 @@ public class RecentlyUsedList {
         putAtFirst(s);
     }
 
-    public String retrieve(int index) {
-        String curr = elements.get(index);
+    public T retrieve(int index) {
+        T curr = elements.get(index);
         moveToFirst(curr);
         return curr;
     }
 
-    private void putAtFirst(String s) {
+    private void putAtFirst(T s) {
         elements.add(0, s);
     }
 
-    private void moveToFirst(String s) {
+    private void moveToFirst(T s) {
         elements.remove(s);
         putAtFirst(s);
     }

@@ -8,7 +8,7 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class RecentlyUsedListTest {
-	private final RecentlyUsedList recentlyUsedList = new RecentlyUsedList();
+	private final RecentlyUsedList<String> recentlyUsedList = new RecentlyUsedList<>();
 
 	@Test
 	public void shouldBeEmptyWhenInitialized() {
@@ -20,6 +20,14 @@ public class RecentlyUsedListTest {
 		recentlyUsedList.add("a thing");
 		assertThat(recentlyUsedList.size(), equalTo(1));
 	}
+
+    @Test
+    public void shouldBeAbleToAddOtherTypesToTheList() {
+        RecentlyUsedList<Integer> integerRecentlyUsedList = new RecentlyUsedList<>();
+        integerRecentlyUsedList.add(32);
+        assertThat(integerRecentlyUsedList.size(), equalTo(1));
+        assertThat(integerRecentlyUsedList.retrieve(0), equalTo(32));
+    }
 
 	@Test
 	public void retrieveItems() {
@@ -76,4 +84,14 @@ public class RecentlyUsedListTest {
 		assertThat(recentlyUsedList.retrieve(1), equalTo("3"));
 		assertThat(recentlyUsedList.retrieve(2), equalTo("1"));
 	}
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void errorCase1IndexLessThanZero() {
+	    recentlyUsedList.retrieve(-1);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void errorCase2IndexBiggerThanTheListSize() {
+        recentlyUsedList.retrieve(111);
+    }
 }
