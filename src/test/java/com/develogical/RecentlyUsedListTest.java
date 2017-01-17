@@ -8,28 +8,27 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class RecentlyUsedListTest {
+	private final RecentlyUsedList recentlyUsedList = new RecentlyUsedList();
+
 	@Test
 	public void shouldBeEmptyWhenInitialized() {
-		assertThat(new RecentlyUsedList().size(), equalTo(0));
+		assertThat(recentlyUsedList.size(), equalTo(0));
 	}
 
 	@Test
 	public void shouldBeAbleToAddToTheList() {
-		RecentlyUsedList recentlyUsedList = new RecentlyUsedList();
 		recentlyUsedList.add("a thing");
 		assertThat(recentlyUsedList.size(), equalTo(1));
 	}
 
 	@Test
 	public void retrieveItems() {
-		RecentlyUsedList recentlyUsedList = new RecentlyUsedList();
 		recentlyUsedList.add("sth");
 		assertThat(recentlyUsedList.retrieve(0), equalTo("sth"));
 	}
 
 	@Test
 	public void theMostRecentItemShouldBeFirstInTheList() {
-		RecentlyUsedList recentlyUsedList = new RecentlyUsedList();
 		recentlyUsedList.add("older");
 		recentlyUsedList.add("newer");
 		assertThat(recentlyUsedList.retrieve(0), equalTo("newer"));
@@ -37,7 +36,6 @@ public class RecentlyUsedListTest {
 
 	@Test
 	public void retrievesAllItemsAtTheRightOrder() {
-		RecentlyUsedList recentlyUsedList = new RecentlyUsedList();
 		recentlyUsedList.add("1");
 		recentlyUsedList.add("2");
 		recentlyUsedList.add("3");
@@ -48,7 +46,6 @@ public class RecentlyUsedListTest {
 
 	@Test
 	public void retrievesItemsInOrderOfRecentUse() {
-		RecentlyUsedList recentlyUsedList = new RecentlyUsedList();
 		recentlyUsedList.add("1");
 		recentlyUsedList.add("2");
 		recentlyUsedList.add("3");
@@ -62,7 +59,6 @@ public class RecentlyUsedListTest {
 
 	@Test
 	public void itemsInTheListAreUnique() {
-		RecentlyUsedList recentlyUsedList = new RecentlyUsedList();
 		recentlyUsedList.add("1");
 		recentlyUsedList.add("1");
 		assertThat(recentlyUsedList.size(), equalTo(1));
@@ -70,7 +66,6 @@ public class RecentlyUsedListTest {
 
 	@Test
 	public void itemsThatAlreadyExistAreTreatedAsMostRecentlyUsed() {
-		RecentlyUsedList recentlyUsedList = new RecentlyUsedList();
 		recentlyUsedList.add("1");
 		recentlyUsedList.add("2");
 		recentlyUsedList.add("3");
