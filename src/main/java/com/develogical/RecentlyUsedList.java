@@ -1,9 +1,7 @@
 package com.develogical;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 public class RecentlyUsedList {
     private final List<String> elements = new ArrayList<>();
@@ -14,8 +12,7 @@ public class RecentlyUsedList {
 
     public void add(String s) {
         if (elements.contains(s)) {
-            elements.remove(s);
-            elements.add(0,s);
+            putAtFirst(s);
             return;
         }
         elements.add(0, s);
@@ -23,8 +20,12 @@ public class RecentlyUsedList {
 
     public String retrieve(int index) {
         String curr = elements.get(index);
-        elements.remove(index);
-        elements.add(0,curr);
+        putAtFirst(curr);
         return curr;
+    }
+
+    private void putAtFirst(String s) {
+        elements.remove(s);
+        elements.add(0, s);
     }
 }
