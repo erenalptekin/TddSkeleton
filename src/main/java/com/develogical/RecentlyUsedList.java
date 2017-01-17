@@ -12,20 +12,24 @@ public class RecentlyUsedList {
 
     public void add(String s) {
         if (elements.contains(s)) {
-            putAtFirst(s);
+            moveToFirst(s);
             return;
         }
-        elements.add(0, s);
+        putAtFirst(s);
     }
 
     public String retrieve(int index) {
         String curr = elements.get(index);
-        putAtFirst(curr);
+        moveToFirst(curr);
         return curr;
     }
 
     private void putAtFirst(String s) {
-        elements.remove(s);
         elements.add(0, s);
+    }
+
+    private void moveToFirst(String s) {
+        elements.remove(s);
+        putAtFirst(s);
     }
 }
